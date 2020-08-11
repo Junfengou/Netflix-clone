@@ -35,7 +35,7 @@ function Row({ title, fetchURL, isLargeRow }) {
 
   return (
     <div className="row">
-      <h4>{title}</h4>
+      <h2>{title}</h2>
 
       <div className="row__posters">
         {/*row posters */}

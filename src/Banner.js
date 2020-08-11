@@ -21,6 +21,12 @@ function Banner() {
 
   console.log("Banner: ", movie);
 
+  //purpose of this function is to detect the number of text in the description
+  //If is over certain characters, it will shows as...
+  function truncate(str, n) {
+    return str?.length > n ? str.substr(0, n - 1) + "..." : str;
+  }
+
   return (
     <header
       className="banner"
@@ -45,8 +51,10 @@ function Banner() {
         </div>
 
         {/* decriptions  */}
-        <h1 className="banner__description">{movie?.overview}</h1>
+        <h1 className="banner__description">{truncate(movie?.overview)}</h1>
       </div>
+
+      <div className="banner--fadeBottom" />
     </header>
   );
 }
