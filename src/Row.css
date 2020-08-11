@@ -1,0 +1,35 @@
+.row {
+  margin-left: 20px;
+}
+
+.row__posters {
+  display: flex;
+  overflow-y: hidden; /*hide the scroll bar for y-axis*/
+  overflow-x: scroll;
+  padding: 20px; /*Very important to pad it if there's transform*/
+}
+
+.row__posters::-webkit-scrollbar {
+  display: none; /*Keep the functionality of the scroll but make it invisible*/
+}
+
+.row__poster {
+  width: 100%;
+  object-fit: contain; /*No matter how you resize it, it will always look good*/
+  max-height: 100px;
+  transition: transform 450ms; /*Adds the smooth transition*/
+  margin-right: 10px; /*Spacing between items*/
+}
+
+.row__poster:hover {
+  transform: scale(1.08);
+}
+
+.row__posterLarge {
+  max-height: 250px;
+}
+
+.row__posterLarge:hover {
+  /*transform: scale(1.09);*/
+  transform: scale(1.15);
+}

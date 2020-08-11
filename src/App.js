@@ -1,24 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import Row from "./Row";
+import requests from "./requests";
+import Banner from "./Banner";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* Nav */}
+      {/* Banner */}
+      <Banner />
+
+      {/*A component which contains a props called title and passing in a value for the props */}
+      <Row title="Trending Now" fetchURL={requests.fetchTrending} isLargeRow />
+      {/*or isLargeRow={true} */}
+      <Row title="Top Rated" fetchURL={requests.fetchTopRated} />
+      <Row title="Action Movies" fetchURL={requests.fetchActionMovies} />
+      <Row title="Comedy" fetchURL={requests.fetchComedyMovies} />
+      <Row title="Horror" fetchURL={requests.fetchHorrorMovies} />
+      <Row title="Romance" fetchURL={requests.fetchRomanceMovies} />
     </div>
   );
 }
