@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "./axios";
 import requests from "./requests";
 import "./Row.css";
+import Youtube from "react-youtube";
+import movieTrailer from "movie-trailer";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
@@ -9,6 +11,31 @@ const base_url = "https://image.tmdb.org/t/p/original/";
 function Row({ title, fetchURL, isLargeRow }) {
   //State is a good place to write variable in React'
   const [movies, setMovies] = useState([]);
+
+  const [trailerUrl, setTrailerUrl] = useState("");
+
+  const opts = {
+    height: "390",
+    //width: "100%",
+    width: "640",
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      autoplay: 1,
+    },
+  };
+
+  const handleClick = (movie) => {
+    if (trailerUrl) {
+      setTrailerUrl("");
+    } else {
+      movieTrailer(movie?.name || "")
+        .then((url) => {
+          const urlParams = new URLSearchParams(new URL(url).search);
+          setTrailerUrl(urlParams.get("v"));
+        })
+        .catch((error) => console.log(error));
+    }
+  };
 
   //A snippet of code which runs based on a specific condition
   useEffect(() => {
@@ -43,6 +70,7 @@ function Row({ title, fetchURL, isLargeRow }) {
         {movies.map((movie) => (
           <img
             key={movie.id} //This will slightly optimize the loading of large list
+            onClick={() => handleClick(movie)}
             className={`row__poster ${isLargeRow && "row__posterLarge"}`} //Different stlying purpose
             src={`${base_url}${
               isLargeRow ? movie.poster_path : movie.backdrop_path
@@ -55,6 +83,8 @@ function Row({ title, fetchURL, isLargeRow }) {
       {/* title */}
       {/*Now state the props and it will print out whatever is passed in here*/}
       {/* container -> posters */}
+      {/**<Youtube videoId={trailerUrl} opts={opts} />*/}
+      {trailerUrl && <Youtube videoId={trailerUrl} opts={opts} />}
     </div>
   );
 }
