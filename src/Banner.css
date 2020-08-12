@@ -47,6 +47,7 @@
 }
 
 .banner--fadeBottom {
+  /*A subtle fade that claim a div of itself*/
   height: 7.4rem;
   background-image: linear-gradient(
     180deg,
